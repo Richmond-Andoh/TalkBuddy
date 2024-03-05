@@ -8,3 +8,7 @@
   color: white;
   font-family: serif;
 }
+
+.logo {
+  filter: invert(100%)
+}
