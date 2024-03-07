@@ -12,3 +12,11 @@
 .logo {
   filter: invert(100%)
 }
+
+.nav-link {
+  margin: 0 7px;
+  padding: 6px 10px;
+  text-decoration: none;
+  border-radius: 2px;
+  font-weight: 600;
+}
