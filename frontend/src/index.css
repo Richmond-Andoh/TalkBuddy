@@ -20,3 +20,7 @@
   border-radius: 2px;
   font-weight: 600;
 }
+.MuiOutlinedInput-input-root .Mui-focused,
+.MuiOutlinedInput-notchedOutline {
+  border-color: white !important;
+}
