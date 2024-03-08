@@ -1,7 +1,29 @@
 import {Box, Typography, Button}  from '@mui/material'
 import CustomizedInput from '../components/shared/CustomizedInput'
+import { AiOutlineLogin } from "react-icons/ai";
+import { useAuth } from '../context/AuthContext';
+import { toast } from 'react-hot-toast';
+
 
 const Login = () => {
+  const auth = useAuth();
+  const handleSubmit = async (e: any) => {
+    e.preventDeafault();
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    try {
+      toast.loading("Signing In", { id: "Login"})
+      await auth?.login(email, password)
+      toast.success("Signed in successful", {id: "Login"})
+    } catch (error) {
+      console.log(error)
+      toast.error("Failed to Sign in", {id: "Login"})
+    }
+    console.log(email, password);
+    
+  }
   return (
       <Box width={"100%"} height={"100%"} display="flex" flex={1}>
         <Box padding={8} alignItems={"center"} display={{md: "flex", sm: "none", xs: "none"}}>
@@ -17,7 +39,7 @@ const Login = () => {
           ml={"auto"}
           mt={16}
         >
-          <form action="" 
+          <form action="" onClick={handleSubmit}
             style={{
               margin: "auto",
               padding: "30px",
@@ -41,20 +63,25 @@ const Login = () => {
                 <CustomizedInput name="email" label="Email" type="email" />
                 <CustomizedInput name="password" label="Password" type="password" />
                
-                <Button type='submit' 
+                <Button type='submit'  className='btn-login'
                 sx=
                 {{
                   px: 2, 
                   py: 1, 
                   mt: 3, 
-                  bgColor: "#00fffc", 
-                  color: "black",
+                  bgcolor: "#00fffc", 
+                  color: "white",
                   ":hover": {
                     bgcolor: "white",
                     color: "black"
                   }
-              
-                }}>Login</Button>
+                }}
+                endIcon={<AiOutlineLogin />}
+
+                >
+                  
+                  Login
+                </Button>
 
              </Box>
           </form>

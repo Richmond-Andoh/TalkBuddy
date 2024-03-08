@@ -4,7 +4,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #05101c;
+  /* background-color: #05101c; */
+  /* background-color: #043; */
   color: white;
   font-family: serif;
 }
@@ -23,4 +24,8 @@
 .MuiOutlinedInput-input-root .Mui-focused,
 .MuiOutlinedInput-notchedOutline {
   border-color: white !important;
+}
+
+.btn-login {
+  background-color: teal !important;
 }
