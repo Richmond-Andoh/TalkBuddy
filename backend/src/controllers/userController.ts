@@ -138,9 +138,9 @@ export const verifyUser = async(req, res, next) => {
         // check whether is reqistered or not
         const registeredUser = await User.findById(res.locals.jwtData.id)
         if(!registeredUser) return res.status(401).send("User not registered or token malfunctioned");
+        console.log(registeredUser._id.toString(), res.locals.jwtData.id)
         if(registeredUser._id.toString() !== res.locals.jwtData.id) return res.status(401).send("Permission didn't match");
-
-
+        
         return res.status(200).json({ Message: "Login Successful",
            _id: registeredUser._id, 
            username: registeredUser.username,
