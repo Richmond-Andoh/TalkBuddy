@@ -132,3 +132,25 @@ export const loginUser = async(req, res, next) => {
         return res.status(403).json({ Error: "Invalid Credentials" });
     }
 }
+
+export const verifyUser = async(req, res, next) => {
+    try{
+        // check whether is reqistered or not
+        const registeredUser = await User.findById(res.locals.jwtData.id)
+        if(!registeredUser) return res.status(401).send("User not registered or token malfunctioned");
+        if(registeredUser._id.toString() !== res.locals.jwtData.id) return res.status(401).send("Permission didn't match");
+
+
+        return res.status(200).json({ Message: "Login Successful",
+           _id: registeredUser._id, 
+           username: registeredUser.username,
+           email: registeredUser.email,
+           password: registeredUser.password
+    });
+
+    } 
+    catch(error){
+        console.log(error.message);
+        return res.status(403).json({ Error: "Invalid Credentials" });
+    }
+}

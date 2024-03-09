@@ -24,7 +24,24 @@ const createToken = (id: string, email: string, expiresIn) => {
 }
 
 export const verifyToken = async(req: Request, res: Response, next: NextFunction) => {
+    
     const token = req.signedCookies[`${COOKIE_NAME}`]
+    if(!token || token.trim() === ""){
+        return res.status(401).json({Message: "Token not found"})
+    }
+    return new Promise<void>((resolve, reject) => {
+        return jwt.verify(token, process.env.JWT_SECRET, (err, success) => {
+            if(err){
+                reject(err.message)
+                return  res.status(401).json({Message: "Token expired"})
+            } else {
+                resolve();
+                console.log("Token verification successful")
+                res.locals.jwtData = success;
+                return next();
+            }
+        })
+    })
     console.log(token);
 }
 
