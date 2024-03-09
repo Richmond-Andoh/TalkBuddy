@@ -7,5 +7,7 @@ const userRoute = express.Router()
 userRoute.get("/", getAllUsers)
 userRoute.post("/register", validate(registerValidator), registerUser)
 userRoute.post("/login", validate(loginValidator), loginUser)
+userRoute.get("/auth-status", loginUser)
+
 
 export default userRoute;

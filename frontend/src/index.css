@@ -5,7 +5,7 @@
   padding: 0;
   box-sizing: border-box;
   /* background-color: #05101c; */
-  background-color: #043;
+  /* background-color: #090ff0; */
   color: white;
   font-family: serif;
 }
@@ -28,4 +28,9 @@
 
 .btn-login {
   background-color: teal !important;
+}
+
+form {
+  z-index: 999;
+  background-color: black;
 }
